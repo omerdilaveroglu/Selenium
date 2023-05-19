@@ -5,13 +5,14 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from webdriver_manager.chrome import ChromeDriverManager 
 from selenium.webdriver.common.action_chains import ActionChains
+from constants import globalConstants as gc
 
 class Test_Sauce:
     
     def __init__(self):
         self.driver = driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.maximize_window()
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.get(gc.URL)
 
     def test_invalid_login(self):
 
@@ -30,7 +31,7 @@ class Test_Sauce:
         print(f"Test Sonucu : {testResult}")
 
     def test_valid_login(self):
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.get(gc.URL)
         WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.ID,"user-name")))
         userNameInput = self.driver.find_element(By.ID,"user-name")
         WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.ID,"password")))
@@ -51,7 +52,7 @@ class Test_Sauce:
         loginBtn.click()
 
         sleep(2)
-        self.driver.execute_script("window.scrollTo(0,500)")
+        self.driver.execute_script("window.scrollTo(0,500)") #web sayfasını aşağı kaydırır
         sleep(20)
 
 
